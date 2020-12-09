@@ -31,8 +31,8 @@ for l in lista:
 
     if stat.S_ISDIR(file_stats[stat.ST_MODE]):
         isdir= 'Directory'
-        testa = '[green]'
-        culo = '[/green]'
+        testa = '[bold magenta]'
+        culo = '[/bold magenta]'
     else:
         isdir= 'File'
         testa = '[yellow]'
