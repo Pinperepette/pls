@@ -1,4 +1,6 @@
 # pls
 ## Utility alternative to ls
 
-mkdir .pirate
+
+installation: 
+cd $HOME && mkdir .pirate
