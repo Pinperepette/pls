@@ -22,13 +22,28 @@ def get_content(listato):
     tipo = f"{listato[1]}"
     permessi = f"{listato[2]}"
     misura = f"{listato[3]}"
+    vis = listato[4]
     if tipo == 'File':
         tipo = '\U0001F4C4'
-        return f"[b][green]{name}[/b]\n[yellow]{tipo} [bold magenta]{permessi}\n[medium_violet_red]size: {misura} "
+        return f"[b][green]{name}[/b]\n[yellow]{tipo} [bold magenta]{permessi} {vis}\n[medium_violet_red]size: {misura} "
     else:
         tipo = "\U0001F4C1"
-        return f"[b]{name}[/b]\n[red]{tipo} [bold magenta]{permessi}\n[medium_violet_red]size: {misura}"
+        return f"[b]{name}[/b]\n[red]{tipo} [bold magenta]{permessi} {vis}\n[medium_violet_red]size: {misura}"
 
+def get_list(listato,vis):
+    dz=[]
+    for l in listato:
+        file_name = l
+        file_stats = os.stat(file_name)
+        permission = oct(file_stats.st_mode)[-3:]
+        misura = file_stats [stat.ST_SIZE]
+        if stat.S_ISDIR(file_stats[stat.ST_MODE]):
+            tipo = 'Directory'
+            dz.append([file_name, tipo, permission, misura, vis])
+        else:
+            tipo = 'File'
+            dz.append([file_name, tipo, permission, misura, vis])
+    return dz
 
 def Tabella():
     table = Table(show_header=True, header_style="bold magenta")
@@ -68,20 +83,10 @@ def Tabella():
     console.print(table)
 
 def Tree():
-    dz=[]
-    for l in lista:
-        file_name = l
-        file_stats = os.stat(file_name)
-        permission = oct(file_stats.st_mode)[-3:]
-        misura = file_stats [stat.ST_SIZE]
-        if stat.S_ISDIR(file_stats[stat.ST_MODE]):
-            tipo = 'Directory'
-            dz.append([file_name, tipo, permission, misura])
+    dz = get_list(lista,'\U0001F440')
+    dz2 = get_list(lista2,'\U0001F47B')
+    dz.extend(dz2)
 
-        else:
-            tipo = 'File'
-            dz.append([file_name, tipo, permission, misura])
-    
     user_renderables = [Panel(get_content(z), expand=True) for z in dz]
     console.print(Columns(user_renderables))
 
@@ -91,6 +96,7 @@ try:
         Tabella()
     elif sys.argv [1] == '-t':
         lista = glob.glob('*')
+        lista2 = glob.glob('.*')
         Tree()
     else:
         print(' Usage: pls or pls -l or pls -t')
