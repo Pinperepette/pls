@@ -1,6 +1,6 @@
 # pls
 ## Utility alternative to ls
-![alt text](https://github.com/Pinperepette/pls/blob/main/im.png)
+![alt text](https://github.com/Pinperepette/pls/blob/main/mucca.png)
 ### installation: 
 ### cd $HOME && mkdir .pirate && cd .pirate
 ### git clone https://github.com/Pinperepette/pls
