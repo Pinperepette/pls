@@ -58,9 +58,9 @@ def Tabella():
         file_info = {
             'fname': file_name,
             'fsize': file_stats [stat.ST_SIZE],
-            'f_lm': time.strftime("%m/%d/%Y, %H:%M:%S",time.localtime(file_stats[stat.ST_MTIME])),
-            'f_la': time.strftime("%m/%d/%Y, %H:%M:%S",time.localtime(file_stats[stat.ST_ATIME])),
-            'f_ct': time.strftime("%m/%d/%Y, %H:%M:%S",time.localtime(file_stats[stat.ST_CTIME]))
+            'f_lm': time.strftime("%d/%m/%Y, %H:%M:%S",time.localtime(file_stats[stat.ST_MTIME])),
+            'f_la': time.strftime("%d/%m/%Y, %H:%M:%S",time.localtime(file_stats[stat.ST_ATIME])),
+            'f_ct': time.strftime("%d/%m/%Y, %H:%M:%S",time.localtime(file_stats[stat.ST_CTIME]))
         }
 
         table.add_row( testa + "%(fname)s" % file_info + culo, isdir, permission, "%(fsize)s bytes" % file_info, "%(f_lm)s" % file_info, " %(f_la)s" % file_info, " %(f_ct)s" % file_info)
