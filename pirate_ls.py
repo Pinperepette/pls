@@ -5,6 +5,8 @@ from rich import print
 from rich.columns import Columns
 from rich.panel import Panel
 from rich import print
+from pwd import getpwuid
+from grp import getgrgid
 import json
 import os
 import stat
@@ -45,11 +47,19 @@ def get_list(listato,vis):
             dz.append([file_name, tipo, permission, misura, vis])
     return dz
 
+def get_file_ownership(filename):
+    return (
+        getpwuid(os.stat(filename).st_uid).pw_name,
+        getgrgid(os.stat(filename).st_gid).gr_name
+    )
+
 def Tabella():
     table = Table(show_header=True, header_style="bold magenta")
     table.add_column("Name")
     table.add_column("Type", style="cyan")
-    table.add_column("Permission", style="navajo_white3",  justify="center")
+    table.add_column("User", style="#FF7F1D")
+    table.add_column("Group", style="#0FA4FF")
+    table.add_column("Permission", style="navajo_white3")
     table.add_column("Size", style="red")
     table.add_column("Last Modified", style="yellow")
     table.add_column("Last Accessed", style="bright_green")
@@ -69,6 +79,8 @@ def Tabella():
             culo = '[/bold magenta]'
 
         permission = oct(file_stats.st_mode)[-3:]
+        permission_ = stat.filemode(file_stats.st_mode)
+        ug = get_file_ownership(l)
 
         file_info = {
             'fname': file_name,
@@ -78,7 +90,7 @@ def Tabella():
             'f_ct': time.strftime("%d/%m/%Y, %H:%M:%S",time.localtime(file_stats[stat.ST_CTIME]))
         }
 
-        table.add_row( testa + "%(fname)s" % file_info + culo, isdir, permission, "%(fsize)s bytes" % file_info, "%(f_lm)s" % file_info, " %(f_la)s" % file_info, " %(f_ct)s" % file_info)
+        table.add_row( testa + "%(fname)s" % file_info + culo, ug[0], ug[1] ,isdir, permission + ' ' + permission_, "%(fsize)s bytes" % file_info, "%(f_lm)s" % file_info, " %(f_la)s" % file_info, " %(f_ct)s" % file_info)
 
     console.print(table)
 
