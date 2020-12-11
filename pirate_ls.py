@@ -104,14 +104,14 @@ def Tree():
 
 try:
     if sys.argv [1] == '-l':
-        lista = glob.glob('.*')
+        lista =sorted(glob.glob('.*'))
         Tabella()
     elif sys.argv [1] == '-t':
-        lista = glob.glob('*')
-        lista2 = glob.glob('.*')
+        lista =sorted(glob.glob('*'))
+        lista2 =sorted(glob.glob('.*'))
         Tree()
     else:
         print(' Usage: pls or pls -l or pls -t')
 except:
-    lista = glob.glob('*')
+    lista =sorted(glob.glob('*'))
     Tabella()
