@@ -56,9 +56,9 @@ def get_file_ownership(filename):
 def Tabella():
     table = Table(show_header=True, header_style="bold magenta")
     table.add_column("Name")
-    table.add_column("Type", style="cyan")
-    table.add_column("User", style="#FF7F1D")
-    table.add_column("Group", style="#0FA4FF")
+    table.add_column("User", style="cyan")
+    table.add_column("Group", style="#FF7F1D")
+    table.add_column("Type", style="#0FA4FF")
     table.add_column("Permission", style="navajo_white3")
     table.add_column("Size", style="red")
     table.add_column("Last Modified", style="yellow")
