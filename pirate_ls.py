@@ -1,4 +1,5 @@
 import glob
+from rich import print
 from rich.console import Console
 from rich.table import Table
 from rich import print
@@ -111,7 +112,7 @@ try:
         lista2 =sorted(glob.glob('.*'))
         Tree()
     else:
-        print(' Usage: pls or pls -l or pls -t')
+        print(":pirate_flag:",'[bold spring_green3] Usage: [/bold spring_green3][italic dark_orange3]pls [/italic dark_orange3]or [italic dark_orange3]pls -l[/italic dark_orange3] or [italic dark_orange3]pls -t[/italic dark_orange3]')
 except:
     lista =sorted(glob.glob('*'))
     Tabella()
